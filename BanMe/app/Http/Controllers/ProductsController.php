@@ -61,7 +61,7 @@ class ProductsController extends Controller
     {
             $product = Product::findOrFail($id);
 
-            $product->name = $request->input('name');
+             $product->fill($request->all());
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
