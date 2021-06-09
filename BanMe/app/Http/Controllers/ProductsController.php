@@ -49,6 +49,31 @@ class ProductsController extends Controller
         $product->delete();  
         return redirect()->route('list.product')->with('delete_success','Xóa Sản Phẩm Thành Công');;  
     }
+     public function edit($id)
+    {
+        $product = Products::findOrFail($id);
+        $categories = Category::all();
+        
+        return view('edit.products', compact('product','$categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+            $product = Product::findOrFail($id);
+
+            $product->name = $request->input('name');
+
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $path = $image->store('products', 'public');
+                $product->image = $path;
+            }
+      
+            Session::flash('success', 'Update success!');
+            return redirect()->route('list.product');
+
+    
+    }
     public function search(Request $request){
         $categories = Category::all();  
         $products = Products::where('price','like', "%$request->search%");
