@@ -23,7 +23,7 @@ Route::prefix('product')->group(function(){
     Route::get('/',[ProductsController::class,'index'])->name('list.product');
     Route::get('store',[ProductsController::class,'store'])->name('store.product');
     Route::post('create',[ProductsController::class,'create'])->name('create.product');
-    Route::get('delete/{$product_id}',[ProductsController::class,'delete'])->name('delete.product');
+    Route::get('delete/{product_id}',[ProductsController::class,'delete'])->name('delete.product');
     Route::get('search',[ProductsController::class,'search'])->name('search.product');
 
 
